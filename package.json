@@ -21,15 +21,8 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-<<<<<<< HEAD
     "axios": "^1.4.0",
     "element-plus": "^2.3.8",
-=======
-    "@vueuse/core": "^10.2.1",
-    "@vueuse/integrations": "^10.2.1",
-    "axios": "^1.4.0",
-    "element-plus": "^2.3.7",
->>>>>>> 239fe0acd4cb8ac1303e3a06c3814f2237c8487f
     "nprogress": "^0.2.0",
     "pinia": "^2.1.4",
     "vue": "^3.3.4",

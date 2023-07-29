@@ -1,9 +1,17 @@
 //对外暴露配置路由(常量路由):全部用户都可以访问到的路由
+import Login from '@/views/login/index.vue'
+import Layout from '@/layout/index.vue'
+import Home from '@/views/home/index.vue'
+import NotFound from '@/views/404/index.vue'
+import Screen from '@/views/screen/index.vue'
+import User from '@/views/acl/user/index.vue'
+import Role from '@/views/acl/role/index.vue'
+import Permission from '@/views/acl/permission/index.vue'
 export const constantRoute = [
   {
     //登录
     path: '/login',
-    component: () => import('@/views/login/index.vue'),
+    component: Login,
     name: 'login',
     meta: {
       title: '登录', //菜单标题
@@ -14,7 +22,8 @@ export const constantRoute = [
   {
     //登录成功以后展示数据的路由
     path: '/',
-    component: () => import('@/views/layout/index.vue'),
+    // ts-ignore
+    component:Layout,
     name: 'layout',
     meta: {
       title: '',
@@ -25,7 +34,7 @@ export const constantRoute = [
     children: [
       {
         path: '/home',
-        component: () => import('@/views/home/index.vue'),
+        component: Home,
         meta: {
           title: '首页',
           hidden: false,
@@ -37,7 +46,7 @@ export const constantRoute = [
   {
     //404
     path: '/404',
-    component: () => import('@/views/404/index.vue'),
+    component: NotFound,
     name: '404',
     meta: {
       title: '404',
@@ -48,7 +57,7 @@ export const constantRoute = [
   {
     //数据大屏
     path: '/screen',
-    component: () => import('@/views/screen/index.vue'),
+    component: Screen,
     name: 'Screen',
     meta: {
       hidden: false,
@@ -58,7 +67,7 @@ export const constantRoute = [
   },
   {
     path: '/acl',
-    component: () => import('@/views/layout/index.vue'),
+    component: Layout,
     name: 'Acl',
     meta: {
       title: '权限管理',
@@ -68,7 +77,7 @@ export const constantRoute = [
     children: [
       {
         path: '/acl/user',
-        component: () => import('@/views/acl/user/index.vue'),
+        component: User,
         name: 'User',
         meta: {
           title: '用户管理',
@@ -77,7 +86,7 @@ export const constantRoute = [
       },
       {
         path: '/acl/role',
-        component: () => import('@/views/acl/role/index.vue'),
+        component: Role,
         name: 'Role',
         meta: {
           title: '角色管理',
@@ -86,7 +95,7 @@ export const constantRoute = [
       },
       {
         path: '/acl/permission',
-        component: () => import('@/views/acl/permission/index.vue'),
+        component: Permission,
         name: 'Permission',
         meta: {
           title: '菜单管理',
@@ -97,7 +106,7 @@ export const constantRoute = [
   },
   {
     path: '/product',
-    component: () => import('@/views/layout/index.vue'),
+    component: Layout,
     name: 'Product',
     meta: {
       title: '商品管理',
