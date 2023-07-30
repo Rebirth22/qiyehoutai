@@ -26,6 +26,8 @@
 // 统一管理用户相关的接口
 // 发请求就需要 request
 import request from '@/utils/request'
+// 引入接口的数据类型
+import { loginFormData, loginResponseData, userInfoReponseData } from './type'
 
 // 用户相关的接口
 enum API {
@@ -36,8 +38,8 @@ enum API {
 
 // 暴露请求函数
 // 登入的接口方法
-export const reqLogin = (data: any) => request.post<any, any>(API.LOGIN_URL, data)
+export const reqLogin = (data: loginFormData) => request.post<any, loginResponseData>(API.LOGIN_URL, data)
 // 获取用户信息的接口方法
-export const reqUserInfo = () => request.get<any, any>(API.USERINFO_URL)
+export const reqUserInfo = () => request.get<any, userInfoReponseData>(API.USERINFO_URL)
 //退出登录的接口
 export const reqLogout = () => request.post<any, any>(API.LOGOUT_URL)
