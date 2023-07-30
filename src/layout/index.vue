@@ -85,7 +85,7 @@ const useSetting = useSettingStore()
     top: $base-tabbar-height;
     padding: 20px;
     overflow: auto;
-    background-color: #c60cd7;
+ 
 
     &.fold {
       width: calc(100% - $base-menu-min-width);
