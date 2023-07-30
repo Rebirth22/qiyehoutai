@@ -46,17 +46,16 @@ router.beforeEach(async (to: any, _from: any, next: any) => {
         }
       }
     }
-  } else {
-    // 用户未登录的状态
+  } else {// 用户未登录的状态
     if (to.path == '/login') {
       next()
     } else {
       next({ path: '/login', query: { redirect: to.path } }) //query:{redirect:to.path}指向你在网页输入框输入想访问的路由
       //未登录状态的提示信息
-      ElNotification({ type: 'error', message: '请先登录' })
+      ElNotification({ type: 'error', message: '请先登录', duration: 1000 })
     }
   }
-  next()
+
 })
 
 // 全局后置守卫

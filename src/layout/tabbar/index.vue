@@ -58,10 +58,11 @@ const useSetting = useSettingStore()
 const useUser = useUserStore()
 
 // 退出登录的回调函数
-const logout = () => {
+const logout = async () => {
   //第一件事：向服务器发请求----用户退出登录接口
   // 第二件事：清除用户相关的数据-----token、username、useravatar
-  useUser.userLogout()
+  // useUser.userLogout()//mock接口时的退出
+  await useUser.userLogout()
   // 第三件事：跳转回登录页-----实现临时退出登录，重新登录返回退出登录的页面
   router.push({ path: '/login', query: { redirect: route.path } })
 }

@@ -5,36 +5,17 @@
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
         <!-- 登录的表单 -->
-        <el-form
-          class="login_form"
-          :model="loginForm"
-          :rules="rules"
-          ref="loginForms"
-        >
+        <el-form class="login_form" :model="loginForm" :rules="rules" ref="loginForms">
           <h1>Hello</h1>
           <h2>欢迎来到硅谷甄选</h2>
           <el-form-item prop="username">
-            <el-input
-              :prefix-icon="User"
-              v-model="loginForm.username"
-            ></el-input>
+            <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              type="password"
-              :prefix-icon="Lock"
-              v-model="loginForm.password"
-              show-password
-            ></el-input>
+            <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button
-              :loading="loading"
-              class="login_btn"
-              type="primary"
-              size="default"
-              @click="login"
-            >
+            <el-button :loading="loading" class="login_btn" type="primary" size="default" @click="login">
               登录
             </el-button>
           </el-form-item>
@@ -57,12 +38,13 @@ import { ElNotification } from 'element-plus'
 // 获取时间的函数
 import { getTime } from '@/utils/getTime'
 
+
 // 获取实例
 const userStore = useUserStore()
 const router = useRouter()
 const route = useRoute()
 // 给登录接口传递的参数
-const loginForm = reactive({ username: 'admin', password: '111111' })
+const loginForm = reactive({ username: 'admin', password: 'atguigu123' })
 // 登录表单验证的参数
 const loginForms = ref()
 
@@ -110,7 +92,6 @@ const login = async () => {
   await loginForms.value.validate()
   //按钮加载效果
   loading.value = true
-
   try {
     //也可以书写.then语法
     await userStore.userLogin(loginForm)
@@ -118,11 +99,7 @@ const login = async () => {
     const redirect: any = route.query.redirect
     router.push({ path: redirect || '/' })
     //登录成功的提示信息
-    ElNotification({
-      type: 'success',
-      message: '登录成功！欢迎回来',
-      title: `Hi! ${getTime()}好。`,
-    })
+    ElNotification({type: 'success',message: '登录成功！欢迎回来',title: `Hi!${getTime()}好。`,duration: 1500,})
     //登录成功,加载效果也消失
     loading.value = false
   } catch (error) {
