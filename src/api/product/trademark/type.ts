@@ -4,13 +4,13 @@ export interface ResponseData {
     ok: boolean
 }
 // 已有品牌的数据类型
-export interface TradeMake {
+export interface TradeMark {
     id?: number//新增的可能还没有id
     tmName: string
     logoUrl: string
 }
 // 包含全部品牌数据的ts类型
-export type Records = TradeMake[]
+export type Records = TradeMark[]
 // 获取的已有全部品牌的数据ts类型
 export interface TradeMakeResponseData extends ResponseData {
     data: {

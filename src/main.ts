@@ -8,9 +8,8 @@ import 'virtual:svg-icons-register'
 // 引入自定义插件对象：注册整个项目的全局组件对象
 import gloablComponent from '@/components'
 // element-plus国际化
-import 'element-plus/dist/index.css'
 //@ts-ignore忽略当前文件ts类型的检测否则有红色提示(打包会失败)
-// import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 // 引入模板的全局样式
 import '@/styles/index.scss'
 // 引入路由实例
@@ -36,10 +35,8 @@ import '@/permission'
 const app = createApp(App)
 const pinia = createPinia()
 
-// 注册element-plus插件
-app.use(ElementPlus)
-// // 注册element-plus国际化
-// app.use(ElementPlus, { locale: zhCn })
+// 注册element-plus插件和注册element-plus国际化
+app.use(ElementPlus, { locale: zhCn, })
 // 注册自定义全局组件插件
 app.use(gloablComponent)
 // 注册路由
