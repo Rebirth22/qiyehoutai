@@ -47,7 +47,7 @@ const useUserStore = defineStore('User', {
     // 获取用户信息方法
     async userInfo() {
       const res: userInfoReponseData = await reqUserInfo()
-      console.log(res);
+      // console.log(res);
       if (res.code == 200) {
         this.username = res.data.name
         this.avatar = res.data.avatar
