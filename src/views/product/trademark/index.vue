@@ -49,7 +49,7 @@
       current-change----current-page 改变时触发--------@current-change="getHasTrademark()"直接绑定获取数据的函数也可以
       size-change	-------page-size 改变时触发
      -->
-    <el-pagination @size-change="sizeChange" @current-change="getHasTrademark()" v-model:current-page="pageNow"
+    <el-pagination @size-change="sizeChange" @current-change="getHasTrademark" v-model:current-page="pageNow"
       v-model:page-size="limit" :page-sizes="[3, 5, 7, 9, 20]" :background="true"
       layout=" prev, pager, next, jumper,->,sizes,total " :total="total" />
   </el-card>
@@ -155,6 +155,7 @@ const validatorLogoUrl = (_rule: any, value: any, callBack: any) => {
     callBack(new Error('LOGO图片务必上传'))
   }
 }
+
 // 提交添加品牌表单校验
 const rules = {
   tmName: [
@@ -185,6 +186,7 @@ const addTrademark = () => {
     formRef.value.clearValidate('logoUrl')
   })
 }
+
 // 品牌图片上传之前触发的勾子
 const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
   if (rawFile.type !== 'image/jpeg' && rawFile.type !== 'image/png' && rawFile.type !== 'image/gif') {
@@ -196,6 +198,7 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
   }
   return true
 }
+
 // 品牌图片上传成功触发的勾子
 const handleAvatarSuccess: UploadProps['onSuccess'] = (response) => {
   // response：此次上传品牌图片post请求服务器返回的数据
@@ -232,7 +235,7 @@ const removeTrademark = async (id: number) => {
     ElMessage({ type: 'error', message: "删除失败" })
   }
   // 删除后获取最新的品牌数据
-   getHasTrademark(trademarkArr.value.length > 1 ? pageNow.value : pageNow.value - 1);
+  getHasTrademark(trademarkArr.value.length > 1 ? pageNow.value : pageNow.value - 1);
 }
 
 // 确认上传品牌图片按钮

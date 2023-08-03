@@ -15,7 +15,7 @@
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150px">
-          <template #="{ row, $index }">
+          <template #="{ row }">
             <el-button type="warning" size="small" icon="edit" @click="updateAttr(row)"></el-button>
             <el-popconfirm :title="`你确定删除 ${row.attrName}? `" width="200px" @confirm="deleteAttr(row.id)">
               <template #reference>
@@ -69,7 +69,7 @@
 +
 <script setup lang="ts">
 // 引入监听函数
-import { nextTick, reactive, ref, watch } from 'vue';
+import { nextTick, onBeforeUnmount, reactive, ref, watch } from 'vue';
 // 引入商品分类相关的仓库
 import { useCategoryStore } from '@/stores/category'
 // 分类的接口
@@ -95,6 +95,11 @@ const attrParams = reactive<Attr>({
 const inputArr = ref<any>([]);
 
 
+//路由组件销毁的时候，把仓库分类相关的数据清空
+onBeforeUnmount(() => {
+  //清空仓库的数据
+  useCategory.$reset();
+})
 // 监听三级分类Id的变化
 watch(() => useCategory.c3Id, () => {
   // 获取数据前先清空上一次查询的数据
