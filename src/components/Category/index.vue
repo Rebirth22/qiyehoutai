@@ -8,19 +8,19 @@
                     <!-- v-model="c1Id"数据绑定c1Id里面的数据并显示 
                     @change="handler"触发获取下一级的菜单数据
                 :disabled="!show"根据是否处于修改|添加属性的情况下禁用选择器-->
-                    <el-select :disabled="!show" v-model="useCategory.c1Id" @change="handler">
+                    <el-select :disabled="show == 0 ?  true:false " v-model="useCategory.c1Id" @change="handler">
                         <el-option v-for="(c1) in useCategory.c1Arr" :key="c1.id" :label="c1.name" :value="c1.id" />
                     </el-select>
                 </el-form-item>
                 <!-- 二级分类 -->
                 <el-form-item label="二级分类" placeholder="请选择">
-                    <el-select :disabled="!show" v-model="useCategory.c2Id" @change="handler1">
+                    <el-select :disabled="show == 0 ? true : false" v-model="useCategory.c2Id" @change="handler1">
                         <el-option v-for="(c2) in useCategory.c2Arr" :key="c2.id" :label="c2.name" :value="c2.id" />
                     </el-select>
                 </el-form-item>
                 <!-- 三级分类 -->
                 <el-form-item label="三级分类" placeholder="请选择">
-                    <el-select :disabled="!show" v-model="useCategory.c3Id">
+                    <el-select :disabled="show == 0 ? true : false" v-model="useCategory.c3Id">
                         <el-option v-for="(c3) in useCategory.c3Arr" :key="c3.id" :label="c3.name" :value="c3.id" />
                     </el-select>
                 </el-form-item>

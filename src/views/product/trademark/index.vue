@@ -1,3 +1,4 @@
+<!-- 品牌管理 -->
 <template>
   <el-card class="box-card">
     <!-- 品牌管理添加品牌的按钮 -->
@@ -50,7 +51,9 @@
       size-change	-------page-size 改变时触发
      -->
     <el-pagination @size-change="sizeChange" @current-change="getHasTrademark" v-model:current-page="pageNow"
-      v-model:page-size="limit" :page-sizes="[3, 5, 7, 9, 20]" :background="true"
+      v-model:page-size="limit" 
+      :page-sizes="[3, 5, 7, 9, 20]" 
+      :background="true"
       layout=" prev, pager, next, jumper,->,sizes,total " :total="total" />
   </el-card>
   <!-- 点击添加品牌按键触发的对话框 -->

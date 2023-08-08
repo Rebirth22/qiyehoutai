@@ -1,9 +1,10 @@
+<!-- 属性管理 -->
 <template>
   <!-- 三级分类全局组件 -->
-  <Category :show="show"></Category>
+  <Category :show="show == 0"></Category>
 
   <el-card style="margin: 10px 0;">
-    <div v-show="show == true">
+    <div v-show="show == 0">
       <el-button @click="addAttr" type="primary" size="default" icon="Plus"
         :disabled="useCategory.c3Id ? false : true">添加属性</el-button>
       <el-table border style="margin: 10px 0;" :data="attrArr">
@@ -27,7 +28,7 @@
       </el-table>
     </div>
 
-    <div v-show="show == false">
+    <div v-show="show == 1">
       <!-- 展示添加属性和修改属性的结构 -->
       <el-form :inline="true">
         <el-form-item label="属性名称 :">
@@ -83,7 +84,7 @@ const useCategory = useCategoryStore()
 // 存储商品的属性和属性值
 const attrArr = ref<Attr[]>([])
 // 点击添加属性按钮切换显示组件的绑定数据变化
-const show = ref<boolean>(true)
+const show = ref<number>(0)
 // 收集新增属性的数据
 const attrParams = reactive<Attr>({
   attrName: "",//新增属性的名字
@@ -129,12 +130,12 @@ const addAttr = () => {
     categoryId: useCategory.c3Id,// 点击按钮时收集三级分类的Id，并保存做发送新增属性的请求的参数
     categoryLevel: 3,//代表的三级分类
   })
-  show.value = !show.value
+  show.value = 1
 }
 
 // 点击修改属性按钮切换卡片
 const updateAttr = (row: Attr) => {
-  show.value = !show.value
+  show.value = 1
   //将已有的属性对象赋值给attrParams对象即为
   //ES6->Object.assign进行对象的合并----将row的对象的属性复制到attrParams的对象中--首先，JSON.stringify(row)将row对象转换为字符串表示形式。-----然后，JSON.parse(...)将这个字符串表示形式转换回一个新的对象。
   // Object.assign(attrParams,(row))--+浅拷贝，数据会同步变化，影响原来的数据
@@ -143,7 +144,7 @@ const updateAttr = (row: Attr) => {
 
 // 点击取消按钮结束操作返回分类的数据页面
 const cancel = () => {
-  show.value = true
+  show.value = 0
 }
 
 // 添加属性值的方法
@@ -166,11 +167,12 @@ const save = async () => {
   //添加属性|修改已有的属性已经成功
   if (result.code == 200) {
     //切换场景
-    show.value = !show.value
+    show.value = 0
     //提示信息
     ElMessage({ type: 'success', message: attrParams.id ? '修改成功' : '添加成功' });
     //获取全部已有的属性与属性值
-    await getAttr();
+    getAttr();
+
   } else {
     ElMessage({ type: 'error', message: attrParams.id ? '修改失败' : '添加失败' })
   }

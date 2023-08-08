@@ -23,7 +23,7 @@
         <!-- 内容展示区域 -->
         <el-main class="layout_main" :class="{ fold: useSetting.isCollapse ? true : false }">
           <!-- 一级路由出口 -->
-          <router-view></router-view>
+          <router-view :key="$route.fullPath"></router-view>
         </el-main>
       </el-container>
     </el-container>
