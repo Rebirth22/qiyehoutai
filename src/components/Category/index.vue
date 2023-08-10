@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 // 引入商品分类相关的仓库
-import { useCategoryStore } from '@/stores/category'
+import useCategoryStore  from '@/stores/category'
 
 const useCategory = useCategoryStore()
 // 分类全局组件挂载完毕，通知仓库请求获取一级分类的数据

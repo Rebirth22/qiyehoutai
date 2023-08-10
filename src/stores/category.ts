@@ -4,7 +4,7 @@ import type { CategoryObj, CategoryResponseData } from "@/api/product/attr/type"
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-export const useCategoryStore = defineStore('Category', () => {
+ const useCategoryStore = defineStore('Category', () => {
     // 获取一级分类的数组
     const c1Arr = ref<CategoryObj[]>([])
     const c2Arr = ref<CategoryObj[]>([])
@@ -49,3 +49,4 @@ export const useCategoryStore = defineStore('Category', () => {
         getC3,
     }
 })
+export default useCategoryStore

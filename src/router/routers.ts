@@ -23,7 +23,7 @@ export const constantRoute = [
     //登录成功以后展示数据的路由
     path: '/',
     // ts-ignore
-    component:Layout,
+    component: Layout,
     name: 'layout',
     meta: {
       title: '',

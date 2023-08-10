@@ -1,15 +1,13 @@
-// 创建layout相关的小仓库
+//小仓库:layout组件相关配置仓库
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
-export const useSettingStore = defineStore('useSettingStore', () => {
-  // 折叠菜单的相关回调
-  const isCollapse = ref(true)
-  const ifFold = () => {
-    isCollapse.value = !isCollapse.value
-  }
-  return {
-    isCollapse,
-    ifFold,
-  }
+const useSettingStore = defineStore('SettingStore', {
+  state: () => {
+    return {
+      fold: false, //用户控制菜单折叠还是收起控制
+      refsh: false, //仓库这个属性用于控制刷新效果
+    }
+  },
 })
+
+export default useSettingStore

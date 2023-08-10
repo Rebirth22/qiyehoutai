@@ -1,6 +1,6 @@
 //SPU管理模块的接口
 import request from '@/utils/request'
-import type { AllTradeMark, HasSaleAttrResponseData, HasSpuResponseData, SaleAttrResponseData, SpuData, SpuHasImg } from './type'
+import type { AllTradeMark, HasSaleAttrResponseData, HasSpuResponseData, SaleAttrResponseData, SkuData, SkuInfoData, SpuData, SpuHasImg } from './type'
 
 enum API {
     //获取已有的SPU的数据----展示SPU数据
@@ -52,3 +52,14 @@ export const reqAddOrUpdateSpu = (data: SpuData) => {
         return request.post<any, any>(API.ADDSPU_URL, data)
     }
 }
+//添加SKU的请求方法
+export const reqAddSku = (data: SkuData) =>
+    request.post<any, any>(API.ADDSKU_URL, data)
+
+//获取SKU数据
+export const reqSkuList = (spuId: number | string) =>
+    request.get<any, SkuInfoData>(API.SKUINFO_URL + spuId)
+
+//删除已有的SPU
+export const reqRemoveSpu = (spuId: number | string) =>
+    request.delete<any, any>(API.REMOVESPU_URL + spuId)
