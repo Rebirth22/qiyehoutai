@@ -34,6 +34,14 @@ import '@/permission'
 // 获取应用实例对象
 const app = createApp(App)
 const pinia = createPinia()
+// 使用组合式api写法会重置组件会报错---Store "Category" is built using the setup syntax and does not implement $reset
+// 重置方法--深拷贝复制原state的状态，定义$reset方法重置state
+pinia.use(({ store }) => {
+    const initialState = JSON.parse(JSON.stringify(store.$state));
+    store.$reset = () => {
+        store.$state = JSON.parse(JSON.stringify(initialState));
+    }
+});
 
 // 注册element-plus插件和注册element-plus国际化
 app.use(ElementPlus, { locale: zhCn, })

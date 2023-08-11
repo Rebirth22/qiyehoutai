@@ -8,7 +8,7 @@
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件-->
         <el-menu :collapse="LayOutSettingStore.fold ? true : false" :default-active="$route.path"
-          background-color="#d7d0d3" text-color="white" active-text-color="blue">
+          background-color="#d7d0d3" text-color="#333333" active-text-color="#1d4ed8">
           <!--根据路由动态生成菜单-->
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
@@ -58,12 +58,14 @@ export default {
 .layout_container {
   width: 100%;
   height: 100vh;
+  background: #e8e5e5;
 
   .layout_slider {
-    color: white;
+    // color: white;
     width: $base-menu-width;
     height: 100vh;
     background: $base-menu-background;
+    // transition: all 0.3s;
 
     .scrollbar {
       width: 100%;

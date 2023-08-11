@@ -5,8 +5,7 @@
         </el-form-item>
         <el-form-item label="SPU品牌">
             <el-select v-model="SpuParams.tmId">
-                <el-option v-for="(item) in  AllTradeMark" :key="item.id" :label="item.tmName"
-                    :value="item.id"></el-option>
+                <el-option v-for="(item) in  AllTradeMark" :key="item.id" :label="item.tmName" :value="item.id"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item label="SPU描述">
@@ -42,7 +41,7 @@
                 <el-table-column label="销售属性名字" width="120px" prop="saleAttrName"></el-table-column>
                 <el-table-column label="销售属性值">
                     <!-- row:即为当前SPU已有的销售属性对象 -->
-                    <template #="{ row}">
+                    <template #="{ row }">
                         <el-tag style="margin:0px 5px" @close="row.spuSaleAttrValueList.splice(index, 1)"
                             v-for="(item, index) in row.spuSaleAttrValueList" :key="row.id" class="mx-1" closable>
                             {{ item.saleAttrValueName }}
@@ -53,7 +52,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="操作" width="120px">
-                    <template #="{  $index }">
+                    <template #="{ $index }">
                         <el-button type="primary" size="small" icon="Delete"
                             @click="saleAttr.splice($index, 1)"></el-button>
                     </template>
@@ -63,7 +62,7 @@
         <el-form-item>
             <el-button :disabled="saleAttr.length > 0 ? false : true" type="primary" size="default"
                 @click="save">保存</el-button>
-            <el-button type="primary" size="default" @click="cancel">取消</el-button>
+            <el-button type="warning" size="default" @click="cancel">取消</el-button>
         </el-form-item>
     </el-form>
 </template>
@@ -137,7 +136,10 @@ const handlePictureCardPreview = (file: any) => {
 }
 //照片墙删除文件钩子
 const handleRemove = () => {
-    console.log(123);
+    ElMessage({
+        type: 'success',
+        message: '已删除'
+    })
 }
 //照片钱上传成功之前的钩子约束文件的大小与类型
 const handlerUpload = (file: any) => {
@@ -265,10 +267,9 @@ const save = async () => {
             type: 'success',
             message: SpuParams.value.id ? '更新成功' : '添加成功'
         })
-    }
-
-
+    } 
 }
+
 
 //添加一个新的SPU初始化请求方法
 const initAddSpu = async (c3Id: number | string) => {

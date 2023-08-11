@@ -1,5 +1,5 @@
 <template>
-    <el-button size="small" icon="Refresh" circle @click="updateRefsh"></el-button>
+    <el-button size="small" icon="Refresh" circle @click="updateRefresh"></el-button>
     <el-button size="small" icon="FullScreen" circle @click="fullScreen"></el-button>
 
     <el-popover placement="bottom" title="主题设置" :width="300" trigger="hover">
@@ -50,8 +50,8 @@ let $route = useRoute();
 //收集开关的数据
 let dark = ref<boolean>(false);
 //刷新按钮点击回调
-const updateRefsh = () => {
-    useSetting.refsh = !useSetting.refsh;
+const updateRefresh = () => {
+    useSetting.refresh = !useSetting.refresh;
 };
 //全屏按钮点击的回调
 const fullScreen = () => {
@@ -105,10 +105,10 @@ const changeDark = () => {
 }
 
 //主题颜色的设置
-const setColor = ()=>{
-   //通知js修改根节点的样式对象的属性与属性值
-   const html = document.documentElement;
-   html.style.setProperty('--el-color-primary',color.value);
+const setColor = () => {
+    //通知js修改根节点的样式对象的属性与属性值
+    const html = document.documentElement;
+    html.style.setProperty('--el-color-primary', color.value);
 }
 </script>
 

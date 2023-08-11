@@ -6,7 +6,7 @@
     <!-- 左侧面包屑 -->
     <el-breadcrumb separator-icon="ArrowRight">
         <!-- 面包动态展示路由名字与标题 -->
-        <el-breadcrumb-item v-for="(item, index) in $route.matched" :key="index" v-show="item.meta.title" :to="item.path">
+        <el-breadcrumb-item v-for="(item, index) in route.matched" :key="index" v-show="item.meta.title" :to="item.path">
             <!-- 图标 -->
             <el-icon>
                 <component :is="item.meta.icon"></component>
@@ -23,7 +23,7 @@ import useSettingStore from '@/stores/setting';
 //获取layout配置相关的仓库
 let useSetting= useSettingStore();
 //获取路由对象
-let $route = useRoute();
+let route = useRoute();
 //点击图标的方法
 const changeIcon = () => {
     //图标进行切换

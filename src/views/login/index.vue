@@ -99,7 +99,7 @@ const login = async () => {
     const redirect: any = route.query.redirect
     router.push({ path: redirect || '/' })
     //登录成功的提示信息
-    ElNotification({type: 'success',message: '登录成功！欢迎回来',title: `Hi!${getTime()}好。`,duration: 1500,})
+    ElNotification({ type: 'success', message: '登录成功！欢迎回来', title: `Hi!${getTime()}好。`, duration: 1500, })
     //登录成功,加载效果也消失
     loading.value = false
   } catch (error) {

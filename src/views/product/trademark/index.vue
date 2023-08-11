@@ -23,7 +23,7 @@
             <el-button type="primary" size="small" icon="Edit" @click="updateTrademark(row)"></el-button>
             <el-popconfirm :title="`您确定要删除${row.tmName}?`" width="250px" icon="Delete" @confirm='removeTradeMark(row.id)'>
               <template #reference>
-                <el-button type="primary" size="small" icon="Delete"></el-button>
+                <el-button type="danger" size="small" icon="Delete"></el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -65,8 +65,8 @@
       </el-form>
       <!-- 具名插槽:footer -->
       <template #footer>
-        <el-button type="primary" size="default" @click="cancel">取消</el-button>
         <el-button type="primary" size="default" @click="confirm">确定</el-button>
+        <el-button type="warning" size="default" @click="cancel">取消</el-button>
       </template>
     </el-dialog>
   </div>

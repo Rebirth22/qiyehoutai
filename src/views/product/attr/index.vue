@@ -22,7 +22,7 @@
               <el-button type="primary" size="small" icon="Edit" @click="updateAttr(row)"></el-button>
               <el-popconfirm :title="`你确定删除${row.attrName}?`" width="200px" @confirm="deleteAttr(row.id)">
                 <template #reference>
-                  <el-button type="primary" size="small" icon="Delete"></el-button>
+                  <el-button type="danger" size="small" icon="Delete"></el-button>
                 </template>
               </el-popconfirm>
             </template>
@@ -38,7 +38,7 @@
         </el-form>
         <el-button @click="addAttrValue" :disabled="attrParams.attrName ? false : true" type="primary" size="default"
           icon="Plus">添加属性值</el-button>
-        <el-button type="primary" size="default" @click="cancel">取消</el-button>
+        <el-button type="warning" size="default" @click="cancel">取消</el-button>
         <el-table border style="margin:10px 0px" :data="attrParams.attrValueList">
           <el-table-column label="序号" width="80px" type="index" align="center"></el-table-column>
           <el-table-column label="属性值名称">
@@ -51,14 +51,14 @@
           </el-table-column>
           <el-table-column label="属性值操作">
             <template #="{ index }">
-              <el-button type="primary" size="small" icon="Delete"
+              <el-button type="danger" size="small" icon="Delete"
                 @click="attrParams.attrValueList.splice(index, 1)"></el-button>
             </template>
           </el-table-column>
         </el-table>
         <el-button type="primary" size="default" @click="save"
           :disabled="attrParams.attrValueList.length > 0 ? false : true">保存</el-button>
-        <el-button type="primary" size="default" @click="cancel">取消</el-button>
+        <el-button type="warning" size="default" @click="cancel">取消</el-button>
       </div>
     </el-card>
   </div>
