@@ -28,7 +28,7 @@
           </el-table-column>
         </el-table>
         <!-- 分页器 -->
-        <el-pagination v-model:current-page="pageNow" v-model:page-size="pageSize" :page-sizes="[3, 5, 7, 9]"
+        <el-pagination v-model:current-page="pageNo" v-model:page-size="pageSize" :page-sizes="[3, 5, 7, 9]"
           :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total" @current-change="getHasSpu"
           @size-change="changeSize" />
       </div>
@@ -67,7 +67,7 @@ import { ElMessage } from 'element-plus';
 let categoryStore = useCategoryStore()
 //场景的数据
 let scene = ref<number>(0)      //0:显示已有SPU 1:添加或修改已有SPU 2:添加SKU的结构
-let pageNow = ref<number>(1)    //分页器默认页码
+let pageNo = ref<number>(1)    //分页器默认页码
 let pageSize = ref<number>(5)   //每一页展示几条数据
 let records = ref<Records>([])  //存储已有的SPU的数据
 let total = ref<number>(0)      //存储已有SPU总个数
@@ -88,8 +88,8 @@ watch(() => categoryStore.c3Id, () => {
 //此方法执行:可以获取某一个三级分类下全部的已有的SPU
 const getHasSpu = async (page = 1) => {
   //修改当前页码
-  pageNow.value = page
-  let result: HasSpuResponseData = await reqHasSpu(pageNow.value, pageSize.value, categoryStore.c3Id)
+  pageNo.value = page
+  let result: HasSpuResponseData = await reqHasSpu(pageNo.value, pageSize.value, categoryStore.c3Id)
   if (result.code == 200) {
     records.value = result.data.records
     total.value = result.data.total
@@ -116,7 +116,7 @@ const updateSpu = (row: SpuData) => {
 const changeScene = (obj: any) => {
   scene.value = obj.flag      //子组件Spuform点击取消变为场景0:展示已有的SPU
   if (obj.params == 'update') {
-    getHasSpu(pageNow.value)  //更新留在当前页
+    getHasSpu(pageNo.value)  //更新留在当前页
   } else {
     getHasSpu()               //添加留在第一页
   }
@@ -144,7 +144,7 @@ const deleteSpu = async (row: SpuData) => {
   if (result.code == 200) {
     ElMessage({ type: 'success', message: '删除成功' });
     //获取剩余SPU数据
-    getHasSpu(records.value.length > 1 ? pageNow.value : pageNow.value - 1)
+    getHasSpu(records.value.length > 1 ? pageNo.value : pageNo.value - 1)
   } else {
     ElMessage({ type: 'error', message: '删除失败' })
   }

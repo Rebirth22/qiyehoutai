@@ -2,9 +2,9 @@
   <el-card>
     <!-- :data="skuArr"展示接口获取到总的SKU数据 
     prop展示各自对应的SKU属性的属性值
-   :index="(pageNow - 1) * pageSize"排序-->
+   :index="(pageNo - 1) * pageSize"排序-->
     <el-table border style="margin: 10px 0px;" :data="skuArr">
-      <el-table-column label="序号" type="index" :index="(pageNow - 1) * pageSize + 1" align="center"
+      <el-table-column label="序号" type="index" :index="(pageNo - 1) * pageSize + 1" align="center"
         width="120px"></el-table-column>
       <!-- show-overflow-tooltip：当列中内容溢出列的宽度时，会自动显示一个提示框来展示完整的内容-->
       <el-table-column label="名称" prop="skuName" width="180px" align="center"></el-table-column>
@@ -29,7 +29,7 @@
           <el-button :type="row.isSale == 1 ? 'success' : 'info'" size="small" :title="row.isSale == 1 ? '下架商品' : '上架商品'"
             :icon="row.isSale == 1 ? 'Bottom' : 'Top'" @click="updateSale(row)"></el-button>
           <el-button type="warning" size="small" icon="Edit" @click="updateSku"></el-button>
-          <el-button type="primary" size="small" icon="InfoFilled"  @click="findSku(row)"></el-button>
+          <el-button type="primary" size="small" icon="InfoFilled" @click="findSku(row)"></el-button>
           <el-popconfirm :title="`你确定要删除${row.skuName}?`" @confirm="removeSku" width="200px">
             <template #reference>
               <el-button type="danger" size="small" icon="Delete"></el-button>
@@ -47,7 +47,7 @@
       @current-change 表示当前页码改变时触发的事件
       @size-change 表示每页显示数据条数改变时触发的事件
             -->
-    <el-pagination v-model:current-page="pageNow" v-model:page-size="pageSize" :page-sizes="[5, 10, 20, 30, 40]"
+    <el-pagination v-model:current-page="pageNo" v-model:page-size="pageSize" :page-sizes="[5, 10, 20, 30, 40]"
       :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total" @current-change="getHasSku"
       @size-change="handler" />
 
@@ -110,15 +110,15 @@ import { ElMessage } from 'element-plus';
 import { onMounted, ref } from 'vue';
 
 // 分页器数据=>
-let pageNow = ref<number>(1)        //分页器当前页码
+let pageNo = ref<number>(1)        //分页器当前页码
 let pageSize = ref<number>(5)       //每页展示几条数据
 let total = ref<number>(0)          //总的SKU数据条数
 let skuArr = ref<SkuData[]>([])     //总的SKU数组信息
 // 获取SKU的信息
 const getHasSku = async (page = 1) => {
   //当前分页器的页码
-  pageNow.value = page
-  let result: SkuResponseData = await reqSkuList(pageNow.value, pageSize.value)
+  pageNo.value = page
+  let result: SkuResponseData = await reqSkuList(pageNo.value, pageSize.value)
   if (result.code == 200) {
     total.value = result.data.total
     skuArr.value = result.data.records
@@ -142,12 +142,12 @@ const updateSale = async (row: SkuData) => {
     await reqCancelSale((row.id as number))             //下架操作
     ElMessage({ type: 'info', message: '下架成功' })    //提示信息
     //发请求获取当前更新完毕的全部已有的SKU
-    getHasSku(pageNow.value)
+    getHasSku(pageNo.value)
   } else {
     await reqSaleSku((row.id as number))                //上架操作
     ElMessage({ type: 'success', message: '上架成功' })  //提示信息
     //发请求获取当前更新完毕的全部已有的SKU
-    getHasSku(pageNow.value)
+    getHasSku(pageNo.value)
   }
 }
 
@@ -178,7 +178,7 @@ const removeSku = async (id: number) => {
     //提示信息
     ElMessage({ type: 'success', message: '删除成功' });
     //获取已有全部商品
-    getHasSku(skuArr.value.length > 1 ? pageNow.value : pageNow.value - 1);
+    getHasSku(skuArr.value.length > 1 ? pageNo.value : pageNo.value - 1);
   } else {
     //删除失败
     ElMessage({ type: 'error', message: '系统数据不能删除' });

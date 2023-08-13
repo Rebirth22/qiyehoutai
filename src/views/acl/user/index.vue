@@ -22,7 +22,7 @@
       @selection-change="selectChange"：table复选框勾选的时候会触发的事件-->
       <!-- show-overflow-tooltip文字溢出用提示框来显示 -->
       <el-table-column type="selection" align="center"></el-table-column>
-      <el-table-column label="#" align="center" type="index" :index="(pageNow - 1) * pageSize + 1"></el-table-column>
+      <el-table-column label="#" align="center" type="index" :index="(pageNo - 1) * pageSize + 1"></el-table-column>
       <el-table-column label="ID" align="center" prop="id"></el-table-column>
       <el-table-column label="用户名字" align="center" prop="username" show-overflow-tooltip></el-table-column>
       <el-table-column label="用户名称" align="center" prop="name" show-overflow-tooltip></el-table-column>
@@ -45,7 +45,7 @@
     <!-- @current-change 当页码改变时会触发 getHasUser 
         @size-change="changeSize"当每页显示条目数改变时会触发 changeSize
         -->
-    <el-pagination v-model:current-page="pageNow" v-model:page-size="pageSize" :page-sizes="[5, 7, 9, 11]"
+    <el-pagination v-model:current-page="pageNo" v-model:page-size="pageSize" :page-sizes="[5, 7, 9, 11]"
       :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total" @current-change="getHasUser"
       @size-change="changeSize" />
 
@@ -127,15 +127,15 @@ onMounted(() => {
   getHasUser()
 })
 // 分页器的数据和用户数据
-let pageNow = ref<number>(1)      //默认页码
+let pageNo = ref<number>(1)      //默认页码
 let pageSize = ref<number>(5)     //一页展示几条数据
 let total = ref<number>(0)        //用户总个数
 let userArr = ref<Records>([])    //存储全部用户的数组
 //获取全部已有的用户信息---搜索指定用户时会根据keyword获取数据(不查找时可不携带)
 // 接口地址：'/admin/acl/user/${page}/${limit}/?username=${username}'
 const getHasUser = async (page = 1) => {
-  pageNow.value = page          //收集当前页码
-  let result: UserResponseData = await reqUserInfo(pageNow.value, pageSize.value, keyword.value)
+  pageNo.value = page          //收集当前页码
+  let result: UserResponseData = await reqUserInfo(pageNo.value, pageSize.value, keyword.value)
   if (result.code == 200) {
     total.value = result.data.total
     userArr.value = result.data.records
@@ -211,7 +211,7 @@ const save = async () => {
     ElMessage({ type: 'success', message: userParams.id ? '更新成功' : '添加成功' });
     //获取最新的全部账号的信息----有用户id更新留在当前页，新增回到第一页
     //会出现操作修改超级管理员账号的时候丢失用户，要重置浏览器
-    getHasUser(userParams.id ? pageNow.value : 1)
+    getHasUser(userParams.id ? pageNo.value : 1)
     // window.location.reload()      //浏览器自动刷新一次
   } else {
     //关闭抽屉
@@ -288,7 +288,7 @@ const confirmClick = async () => {
     //关闭抽屉
     drawer1.value = false
     //获取更新完毕用户的信息,更新完毕留在当前页
-    getHasUser(pageNow.value)
+    getHasUser(pageNo.value)
   }
 }
 
@@ -300,7 +300,9 @@ const deleteUser = async (userId: number) => {
   let result: any = await reqRemoveUser(userId);
   if (result.code == 200) {
     ElMessage({ type: 'success', message: '删除成功' });
-    getHasUser(userArr.value.length > 1 ? pageNow.value : pageNow.value - 1);
+    getHasUser(userArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
+  } else {
+    ElMessage({ type: 'error', message: result.data })
   }
 }
 //table复选框勾选的时候会触发的事件
@@ -319,7 +321,7 @@ const deleteSelectUser = async () => {
   let result: any = await reqSelectUser(idsList);
   if (result.code == 200) {
     ElMessage({ type: 'success', message: '删除成功' })
-    getHasUser(userArr.value.length > 1 ? pageNow.value : pageNow.value - 1)
+    getHasUser(userArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
     //根据当前页存储全部用户的数组长度判断
   }
 }
@@ -334,7 +336,7 @@ const search = () => {
 }
 
 // 重置页面的回调函数
-const usesetting= useSettingStore()
+const usesetting = useSettingStore()
 const reset = () => {
   usesetting.refresh = !usesetting.refresh;
 }
