@@ -1,14 +1,14 @@
 <template>
   <div class="layout_container">
     <!-- 左侧菜单 -->
-    <div class="layout_slider"  :class="{ fold: LayOutSettingStore.fold ? true : false }">
+    <div class="layout_slider" :class="{ fold: LayOutSettingStore.fold ? true : false }">
       <Logo></Logo>
       <!-- 展示菜单 -->
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件-->
         <el-menu :collapse="LayOutSettingStore.fold ? true : false" :default-active="$route.path"
-          background-color="#d7d0d3" text-color="#333333" active-text-color="#1d4ed8">
+         background-color="#001529" text-color="white"  active-text-color="#1d4ed8">
           <!--根据路由动态生成菜单-->
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
@@ -58,14 +58,13 @@ export default {
 .layout_container {
   width: 100%;
   height: 100vh;
-  background: #e8e5e5;
 
   .layout_slider {
-    // color: white;
+    color: white;
     width: $base-menu-width;
     height: 100vh;
     background: $base-menu-background;
-    // transition: all 0.3s;
+    transition: all 0.3s;
 
     .scrollbar {
       width: 100%;
@@ -74,11 +73,6 @@ export default {
       .el-menu {
         border-right: none;
       }
-
-    }
-
-    &.fold {
-      width: $base-menu-min-width
     }
   }
 
@@ -105,7 +99,6 @@ export default {
     padding: 20px;
     overflow: auto;
     transition: all 0.3s;
-
 
     &.fold {
       width: calc(100vw - $base-menu-min-width );

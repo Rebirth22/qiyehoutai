@@ -18,6 +18,8 @@ import router from './router'
 import { createPinia } from 'pinia'
 //引入路由鉴权文件
 import '@/permission'
+// 暗黑模式
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 // // 测试mock
 // import axios from 'axios'

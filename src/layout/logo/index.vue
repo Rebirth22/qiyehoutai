@@ -18,7 +18,7 @@ export default {
 .logo {
     width: 100%;
     height: $base-menu-logo-height;
-    color: #333333;
+    color: white;
     display: flex;
     align-items: center;
     padding: 10px;
@@ -29,7 +29,6 @@ export default {
     p{
        font-size: $base-logo-title-fontSize; 
        margin-left: 10px;
-       overflow: hidden;
     }
 }
 </style>
