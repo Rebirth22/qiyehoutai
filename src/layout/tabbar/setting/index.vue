@@ -105,10 +105,13 @@ const changeDark = () => {
 }
 
 //主题颜色的设置
+// const html = document.documentElement;：这一行获取了网页文档的根元素，即 < html > 元素。这样可以通过修改根元素的样式来改变整个页面的外观。 
+// html.style.setProperty('--el-color-primary', color.value);：这一行使用 CSS 变量（自定义属性）来设置页面的主要颜色。
+// --el-color-primary是一个自定义的 CSS 变量，用于表示页面的主要颜色。color.value 则是一个变量，代表用户选择的颜色值。通过设置这个 CSS 变量，可以影响整个页面中基于这一变量的元素的颜色
 const setColor = () => {
     //通知js修改根节点的样式对象的属性与属性值
     const html = document.documentElement;
-    html.style.setProperty('--el-color-primary', color.value);
+    html.style.setProperty('--el-color-primary', color.value);//elementplus里面的方法
 }
 </script>
 
