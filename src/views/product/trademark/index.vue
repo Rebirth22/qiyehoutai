@@ -20,10 +20,10 @@
         </el-table-column>
         <el-table-column label="品牌操作">
           <template #="{ row }">
-            <el-button type="primary" size="small" icon="Edit" @click="updateTrademark(row)"></el-button>
+            <el-button type="primary" size="small" icon="Edit" @click="updateTrademark(row)"  v-has="`btn.Trademark.update`"></el-button>
             <el-popconfirm :title="`您确定要删除${row.tmName}?`" width="250px" icon="Delete" @confirm='removeTradeMark(row.id)'>
               <template #reference>
-                <el-button type="danger" size="small" icon="Delete"></el-button>
+                <el-button type="danger" size="small" icon="Delete"  v-has="`btn.Trademark.remove`"></el-button>
               </template>
             </el-popconfirm>
           </template>

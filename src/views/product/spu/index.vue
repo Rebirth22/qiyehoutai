@@ -6,7 +6,7 @@
       <!-- v-if|v-show:都可以实现显示与隐藏 -->
       <div v-show="scene == 0">
         <el-button @click="addSpu" type="primary" size="default" icon="Plus"
-          :disabled="categoryStore.c3Id ? false : true">添加SPU</el-button>
+          :disabled="categoryStore.c3Id ? false : true"  v-has="`btn.Spu.add`">添加SPU</el-button>
         <!-- 展示已有SPU数据 -->
         <el-table style="margin:10px 0px;" border :data="records">
           <el-table-column label="序号" type="index" align="center" width="80px"></el-table-column>

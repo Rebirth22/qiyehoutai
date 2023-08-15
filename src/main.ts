@@ -53,5 +53,11 @@ app.use(gloablComponent)
 app.use(router)
 // 注册pinia
 app.use(pinia)
+
+//引入自定义指令文件---全局指令，判断按钮是否有权限v-has绑定对应的按钮名字（接口返回）
+import { isHasButton } from '@/directive/Button'
+isHasButton(app)
+
+
 // 将应用挂载到挂载点上
 app.mount('#app')
