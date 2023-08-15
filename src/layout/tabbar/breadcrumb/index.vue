@@ -9,7 +9,7 @@
         <el-breadcrumb-item v-for="(item, index) in route.matched" :key="index" v-show="item.meta.title" :to="item.path">
             <!-- 图标 -->
             <el-icon>
-                <component :is="item.meta.icon"></component>
+                <component :is="item.meta.icon" v-if="item.meta.icon ? true : false"></component>
             </el-icon>
             <!-- 面包屑展示匹配路由的标题 -->
             <span>{{ item.meta.title }}</span>
@@ -21,7 +21,7 @@
 import { useRoute } from 'vue-router';
 import useSettingStore from '@/stores/setting';
 //获取layout配置相关的仓库
-let useSetting= useSettingStore();
+let useSetting = useSettingStore();
 //获取路由对象
 let route = useRoute();
 //点击图标的方法

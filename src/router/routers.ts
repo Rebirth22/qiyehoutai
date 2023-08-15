@@ -1,17 +1,9 @@
 //对外暴露配置路由(常量路由):全部用户都可以访问到的路由
-import Login from '@/views/login/index.vue'
-import Layout from '@/layout/index.vue'
-import Home from '@/views/home/index.vue'
-import NotFound from '@/views/404/index.vue'
-import Screen from '@/views/screen/index.vue'
-import User from '@/views/acl/user/index.vue'
-import Role from '@/views/acl/role/index.vue'
-import Permission from '@/views/acl/permission/index.vue'
 export const constantRoute = [
   {
     //登录
     path: '/login',
-    component: Login,
+    component: () => import('@/views/login/index.vue'),
     name: 'login',
     meta: {
       title: '登录', //菜单标题
@@ -22,19 +14,18 @@ export const constantRoute = [
   {
     //登录成功以后展示数据的路由
     path: '/',
-    // ts-ignore
-    component: Layout,
+    component: () => import('@/layout/index.vue'),
     name: 'layout',
     meta: {
       title: '',
       hidden: false,
-      // icon: '',
+      icon: '',
     },
     redirect: '/home',
     children: [
       {
         path: '/home',
-        component: Home,
+        component: () => import('@/views/home/index.vue'),
         meta: {
           title: '首页',
           hidden: false,
@@ -46,7 +37,7 @@ export const constantRoute = [
   {
     //404
     path: '/404',
-    component: NotFound,
+    component: () => import('@/views/404/index.vue'),
     name: '404',
     meta: {
       title: '404',
@@ -55,9 +46,8 @@ export const constantRoute = [
     },
   },
   {
-    //数据大屏
     path: '/screen',
-    component: Screen,
+    component: () => import('@/views/screen/index.vue'),
     name: 'Screen',
     meta: {
       hidden: false,
@@ -65,9 +55,13 @@ export const constantRoute = [
       icon: 'Platform',
     },
   },
+]
+
+//异步路由
+export const asyncRoute = [
   {
     path: '/acl',
-    component: Layout,
+    component: () => import('@/layout/index.vue'),
     name: 'Acl',
     meta: {
       title: '权限管理',
@@ -77,7 +71,7 @@ export const constantRoute = [
     children: [
       {
         path: '/acl/user',
-        component: User,
+        component: () => import('@/views/acl/user/index.vue'),
         name: 'User',
         meta: {
           title: '用户管理',
@@ -86,7 +80,7 @@ export const constantRoute = [
       },
       {
         path: '/acl/role',
-        component: Role,
+        component: () => import('@/views/acl/role/index.vue'),
         name: 'Role',
         meta: {
           title: '角色管理',
@@ -95,7 +89,7 @@ export const constantRoute = [
       },
       {
         path: '/acl/permission',
-        component: Permission,
+        component: () => import('@/views/acl/permission/index.vue'),
         name: 'Permission',
         meta: {
           title: '菜单管理',
@@ -106,7 +100,7 @@ export const constantRoute = [
   },
   {
     path: '/product',
-    component: Layout,
+    component: () => import('@/layout/index.vue'),
     name: 'Product',
     meta: {
       title: '商品管理',
@@ -152,15 +146,17 @@ export const constantRoute = [
       },
     ],
   },
-  {
-    //任意路由
-    path: '/:pathMatch(.*)*',
-    redirect: '/404',
-    name: 'Any',
-    meta: {
-      title: '任意路由',
-      hidden: true,
-      icon: 'DataLine',
-    },
-  },
 ]
+
+//任意路由
+export const anyRoute = {
+  //任意路由
+  path: '/:pathMatch(.*)*',
+  redirect: '/404',
+  name: 'Any',
+  meta: {
+    title: '任意路由',
+    hidden: true,
+    icon: 'DataLine',
+  },
+}

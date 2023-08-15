@@ -7,7 +7,7 @@ import { constantRoute } from './routers'
 const router = createRouter({
   // 路由模式hash
   history: createWebHashHistory(),
-  routes: constantRoute,
+  routes: constantRoute,//注册路由
   // 滚动行为     表示每次路由导航后，页面会滚动到最顶部的位置。
   scrollBehavior() {
     return {

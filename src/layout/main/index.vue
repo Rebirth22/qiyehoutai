@@ -4,7 +4,7 @@
         <transition name="fade">
             <div>
                 <!-- 渲染layout一级路由组件的子路由 -->
-                <component :is="Component" v-if="flag" />
+                <Component :is="Component" v-if="flag" />
             </div>
         </transition>
     </router-view>
